@@ -15,17 +15,24 @@ import java.util.UUID;
 @Builder
 public class Word {
     @Id
-    @Column(length = 36)
     private String id;
 
     private String word;
 
     public int grade;
 
+    @Lob
+    private byte[] audio;
+
+    private String means;
+
+    private String idioms;
+
     @PrePersist
     public void prePersist() {
-    if (id == null) {
-        id = UUID.randomUUID().toString();
+        if (id == null) {
+            id = UUID.randomUUID().toString();
+        }
     }
 }
-}
+

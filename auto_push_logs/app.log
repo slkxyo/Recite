@@ -1,0 +1,66 @@
+2026-02-08 11:02:29.972 INFO  [main] org.slkxy.Writer - Welcome to the Auto Push.
+2026-02-08 11:02:30.013 INFO  [main] org.slkxy.Writer - EXEC====== [git, version]
+2026-02-08 11:02:30.055 INFO  [main] org.slkxy.Writer - ========== git version 2.52.0.windows.1
+2026-02-08 11:02:30.155 INFO  [main] org.slkxy.Writer - EXEC====== [gh, auth, status]
+2026-02-08 11:02:31.323 INFO  [main] org.slkxy.Writer - ========== github.com
+2026-02-08 11:02:31.336 INFO  [main] org.slkxy.Writer - ==========   âœ? Logged in to github.com account slkxyo (keyring)
+2026-02-08 11:02:31.348 INFO  [main] org.slkxy.Writer - ==========   - Active account: true
+2026-02-08 11:02:31.360 INFO  [main] org.slkxy.Writer - ==========   - Git operations protocol: ssh
+2026-02-08 11:02:31.371 INFO  [main] org.slkxy.Writer - ==========   - Token: gho_************************************
+2026-02-08 11:02:31.381 INFO  [main] org.slkxy.Writer - ==========   - Token scopes: 'delete_repo', 'gist', 'read:org', 'repo'
+2026-02-08 11:02:31.391 INFO  [main] org.slkxy.Writer - Git and Github CLI is ready.
+2026-02-08 11:02:31.404 INFO  [main] org.slkxy.Writer - EXEC====== [git, status]
+2026-02-08 11:02:31.444 INFO  [main] org.slkxy.Writer - ========== fatal: not a git repository (or any of the parent directories): .git
+2026-02-08 11:02:31.462 INFO  [main] org.slkxy.Writer - EXEC====== [git, init]
+2026-02-08 11:02:31.670 INFO  [main] org.slkxy.Writer - ========== Initialized empty Git repository in E:/WorkSpace/Recite/.git/
+2026-02-08 11:02:31.687 INFO  [main] org.slkxy.Writer - EXEC====== [git, add, -A]
+2026-02-08 11:02:31.751 INFO  [main] org.slkxy.Writer - ========== warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+2026-02-08 11:02:31.822 INFO  [main] org.slkxy.Writer - ========== warning: in the working copy of 'pom.xml', LF will be replaced by CRLF the next time Git touches it
+2026-02-08 11:02:31.834 INFO  [main] org.slkxy.Writer - ========== warning: in the working copy of 'src/main/java/org/slkxy/recite/Application.java', LF will be replaced by CRLF the next time Git touches it
+2026-02-08 11:02:31.847 INFO  [main] org.slkxy.Writer - ========== warning: in the working copy of 'src/main/java/org/slkxy/recite/fxcontroller/MainController.java', LF will be replaced by CRLF the next time Git touches it
+2026-02-08 11:02:31.856 INFO  [main] org.slkxy.Writer - ========== warning: in the working copy of 'src/main/resources/org/slkxy/recite/main-view.fxml', LF will be replaced by CRLF the next time Git touches it
+2026-02-08 11:02:31.876 INFO  [main] org.slkxy.Writer - EXEC====== [git, commit, -m, 2026-02-39 11:02:31 Auto Commit]
+2026-02-08 11:02:32.198 INFO  [main] org.slkxy.Writer - ========== [master (root-commit) 3b6480c] 2026-02-39 11:02:31 Auto Commit
+2026-02-08 11:02:32.206 INFO  [main] org.slkxy.Writer - ==========  19 files changed, 5436 insertions(+)
+2026-02-08 11:02:32.215 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 .gitignore
+2026-02-08 11:02:32.222 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 .idea/.gitignore
+2026-02-08 11:02:32.230 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 .idea/encodings.xml
+2026-02-08 11:02:32.238 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 .idea/misc.xml
+2026-02-08 11:02:32.243 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 .idea/uiDesigner.xml
+2026-02-08 11:02:32.253 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 AutoPush.jar
+2026-02-08 11:02:32.260 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 AutoPush.ps1
+2026-02-08 11:02:32.269 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 auto_push_logs/app.log
+2026-02-08 11:02:32.277 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 data/app.db
+2026-02-08 11:02:32.285 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 docs/words.txt
+2026-02-08 11:02:32.293 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 pom.xml
+2026-02-08 11:02:32.301 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 src/main/java/org/slkxy/recite/Application.java
+2026-02-08 11:02:32.309 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 src/main/java/org/slkxy/recite/entity/Word.java
+2026-02-08 11:02:32.319 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 src/main/java/org/slkxy/recite/fxcontroller/MainController.java
+2026-02-08 11:02:32.327 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 src/main/java/org/slkxy/recite/repositories/WordsRepository.java
+2026-02-08 11:02:32.335 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 src/main/java/org/slkxy/recite/service/WordService.java
+2026-02-08 11:02:32.343 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 src/main/resources/application.yaml
+2026-02-08 11:02:32.347 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 src/main/resources/org/slkxy/recite/main-view.fxml
+2026-02-08 11:02:32.359 INFO  [main] org.slkxy.Writer - ==========  create mode 100644 src/test/java/org/slkxy/recite/Test.java
+2026-02-08 11:02:32.373 INFO  [main] org.slkxy.Writer - EXEC====== [git, branch, -m, main]
+2026-02-08 11:02:32.472 INFO  [main] org.slkxy.Main - Please input remote name> 
+2026-02-08 11:02:43.721 INFO  [main] org.slkxy.Main - Please input remote name> Recite
+2026-02-08 11:02:43.731 INFO  [main] org.slkxy.Main - Create a public repo (Y/N)> 
+2026-02-08 11:03:03.699 INFO  [main] org.slkxy.Main - Create a public repo (Y/N)> y
+2026-02-08 11:03:03.707 INFO  [main] org.slkxy.Writer - EXEC====== [gh, repo, create, Recite, --public, --source=., --remote=origin, --push]
+2026-02-08 11:03:05.780 INFO  [main] org.slkxy.Writer - ========== https://github.com/slkxyo/Recite
+2026-02-08 11:03:12.324 INFO  [main] org.slkxy.Writer - ========== branch 'main' set up to track 'origin/main'.
+2026-02-08 11:03:12.333 INFO  [main] org.slkxy.Writer - ========== To github.com:slkxyo/Recite.git
+2026-02-08 11:03:12.342 INFO  [main] org.slkxy.Writer - ==========  * [new branch]      HEAD -> main
+2026-02-08 11:03:12.350 INFO  [main] org.slkxy.Writer - Done!
+2026-02-08 22:07:22.639 INFO  [main] org.slkxy.Writer - Welcome to the Auto Push.
+2026-02-08 22:07:22.718 INFO  [main] org.slkxy.Writer - EXEC====== [git, version]
+2026-02-08 22:07:23.010 INFO  [main] org.slkxy.Writer - ========== git version 2.52.0.windows.1
+2026-02-08 22:07:23.099 INFO  [main] org.slkxy.Writer - EXEC====== [gh, auth, status]
+2026-02-08 22:07:23.840 INFO  [main] org.slkxy.Writer - ========== github.com
+2026-02-08 22:07:23.854 INFO  [main] org.slkxy.Writer - ==========   âœ? Logged in to github.com account slkxyo (keyring)
+2026-02-08 22:07:23.869 INFO  [main] org.slkxy.Writer - ==========   - Active account: true
+2026-02-08 22:07:23.885 INFO  [main] org.slkxy.Writer - ==========   - Git operations protocol: ssh
+2026-02-08 22:07:23.901 INFO  [main] org.slkxy.Writer - ==========   - Token: gho_************************************
+2026-02-08 22:07:23.901 INFO  [main] org.slkxy.Writer - ==========   - Token scopes: 'delete_repo', 'gist', 'read:org', 'repo'
+2026-02-08 22:07:23.917 INFO  [main] org.slkxy.Writer - Git and Github CLI is ready.
+2026-02-08 22:07:23.933 INFO  [main] org.slkxy.Writer - EXEC====== [git, status]
