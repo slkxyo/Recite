@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -24,9 +26,10 @@ public class Word {
     @Lob
     private byte[] audio;
 
-    private String means;
+    @Convert(converter = Jsr310JpaConverters.class)
+    private List<Mean> means;
 
-    private String idioms;
+    private List<Idiom> idioms;
 
     @PrePersist
     public void prePersist() {
