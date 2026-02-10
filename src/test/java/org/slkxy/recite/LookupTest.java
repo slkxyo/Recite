@@ -60,6 +60,8 @@ public class LookupTest {
         Elements eles = mean.select(".shcut-g");
         ArrayList<Mean> means = new ArrayList<>();
         eles.forEach(e -> means.add(createMean(e)) );
+        builder.means();
+
     }
 
     private static Mean createMean(Element mean) {
