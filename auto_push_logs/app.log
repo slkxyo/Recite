@@ -24,3 +24,21 @@
 2026-02-10 08:46:29.313 INFO  [main] org.slkxy.Writer - EXEC====== [git, pull]
 2026-02-10 08:46:34.484 INFO  [main] org.slkxy.Writer - ========== From github.com:slkxyo/Recite
 2026-02-10 08:46:34.507 INFO  [main] org.slkxy.Writer - ==========    8183b81..ead4af6  main       -> origin/main
+2026-02-10 08:46:34.582 INFO  [main] org.slkxy.Writer - ========== error: Your local changes to the following files would be overwritten by merge:
+2026-02-10 08:46:34.595 INFO  [main] org.slkxy.Writer - ========== 	auto_push_logs/app.log
+2026-02-10 08:46:34.611 INFO  [main] org.slkxy.Writer - ========== Please commit your changes or stash them before you merge.
+2026-02-10 08:46:34.642 INFO  [main] org.slkxy.Writer - ========== Updating 8183b81..ead4af6
+2026-02-10 08:46:34.658 INFO  [main] org.slkxy.Writer - ========== Aborting
+2026-02-10 08:46:34.690 INFO  [main] org.slkxy.Writer - EXEC====== [git, add, -A]
+2026-02-10 08:46:34.800 INFO  [main] org.slkxy.Writer - EXEC====== [git, commit, -m, 2026-02-41 08:46:34 Auto Commit]
+2026-02-10 08:46:34.973 INFO  [main] org.slkxy.Writer - ========== [main 10ada9d] 2026-02-41 08:46:34 Auto Commit
+2026-02-10 08:46:34.989 INFO  [main] org.slkxy.Writer - ==========  1 file changed, 26 insertions(+), 66 deletions(-)
+2026-02-10 08:46:35.022 INFO  [main] org.slkxy.Writer - EXEC====== [git, push]
+2026-02-10 08:46:38.694 INFO  [main] org.slkxy.Writer - ========== To github.com:slkxyo/Recite.git
+2026-02-10 08:46:38.714 INFO  [main] org.slkxy.Writer - ==========  ! [rejected]        main -> main (non-fast-forward)
+2026-02-10 08:46:38.729 INFO  [main] org.slkxy.Writer - ========== error: failed to push some refs to 'github.com:slkxyo/Recite.git'
+2026-02-10 08:46:38.753 INFO  [main] org.slkxy.Writer - ========== hint: Updates were rejected because the tip of your current branch is behind
+2026-02-10 08:46:38.773 INFO  [main] org.slkxy.Writer - ========== hint: its remote counterpart. If you want to integrate the remote changes,
+2026-02-10 08:46:38.789 INFO  [main] org.slkxy.Writer - ========== hint: use 'git pull' before pushing again.
+2026-02-10 08:46:38.811 INFO  [main] org.slkxy.Writer - ========== hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+2026-02-10 08:46:38.834 INFO  [main] org.slkxy.Writer - Error!
