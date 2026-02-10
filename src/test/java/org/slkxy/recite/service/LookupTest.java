@@ -1,100 +1,84 @@
 package org.slkxy.recite.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.application.Platform;
 import javazoom.jl.player.Player;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slkxy.recite.entity.Idiom;
-import org.slkxy.recite.entity.LookupResult;
 import org.slkxy.recite.entity.Mean;
 import org.slkxy.recite.entity.Word;
 import org.slkxy.recite.repositories.WordsRepository;
 import org.slkxy.recite.util.ClipboardUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.stereotype.Service;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.AfterDomainEventPublication;
+import org.springframework.data.domain.Example;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
+import java.lang.runtime.ObjectMethods;
 import java.net.URL;
 import java.util.ArrayList;
 
-@Service
 @Slf4j
-public class LookupService {
-    @Autowired
-    private  WordsRepository wordsRepository;
-
-    public LookupResult lookup(String word, boolean updateToDB) throws Exception{
-        LookupResult result = lookup(word);
-        if(updateToDB) updateToDB(result);
-
-        return result;
-    }
-
-    private void updateToDB(LookupResult result){
-        Word word = wordsRepository.findByWord(result.getWord()).orElseThrow( () -> new RuntimeException("Word \"" + result.getWord() + "\" not found"));
-        word.setAudio(result.getAudio());
-        word.setMeans(result.getMeans());
-        word.setIdioms(result.getIdioms());
-        word.setLookedUp(true);
-
-        wordsRepository.save(word);
+public class LookupTest {
+    public static void main(String[] args) throws Exception {
+        lookup("communication");
     }
 
 
-    private  LookupResult lookup(String word) throws Exception {
-        LookupResult.LookupResultBuilder lb = LookupResult.builder();
-        lb.word(word);
+    public static Word lookup(String word) throws Exception {
         Element body = Jsoup
                 .connect(createLink(word))
                 .get()
                 .selectFirst("#entryContent")
                 .selectFirst(".entry");
+        Word.WordBuilder wb = Word.builder();
         assert body != null;
         Element audio = body.selectFirst(".top-container");
-        setAudio(lb, audio);
+        setAudio(wb, audio);
 
         Element mean = body.selectFirst(".senses_multiple");
-        setMeans(lb, mean);
+        setMeans(wb, mean);
 
         Element idioms = body.selectFirst(".idioms");
-        setIdioms(lb, idioms);
-
-        LookupResult result = lb.build();
+        setIdioms(wb, idioms);
 
         ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(result);
-        ClipboardUtil.copyToClipboard(json);
+        String json = mapper.writeValueAsString(wb.build());
+        Platform.startup(() -> {
+            ClipboardUtil.copyToClipboard(json);
+            Platform.exit();
+        });
         log.warn("Looked up word: " + word);
         log.warn(json);
 
-        return lb.build();
+        return wb.build();
     }
 
-    private void setAudio(LookupResult.LookupResultBuilder builder, Element audio) throws Exception {
-        if(audio == null) return;
+    private static void setAudio(Word.WordBuilder builder, Element audio) throws Exception {
+        if (audio == null) return;
         String link = audio.select("div.sound.audio_play_button.pron-us").attr("data-src-mp3");
         URL url = new URL(link);
         InputStream in = url.openStream();
         byte[] bytes = in.readAllBytes();
-        builder.audio(null);
+        builder.audio(bytes);
         in.close();
     }
 
-    private void playAudio(byte[] bytes) throws Exception {
+    private static void playAudio(byte[] bytes) throws Exception {
         ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
         Player player = new Player(bis);
         player.play();
 
     }
 
-    private void setMeans(LookupResult.LookupResultBuilder builder, Element mean) {
-        if(mean == null) return;
+    private static void setMeans(Word.WordBuilder builder, Element mean) {
+        if (mean == null) return;
         Elements eles = mean.select(".shcut-g");
         ArrayList<Mean> means = new ArrayList<>();
         eles.forEach(e -> means.add(createMean(e)) );
@@ -102,7 +86,7 @@ public class LookupService {
 
     }
 
-    private  Mean createMean(Element mean) {
+    private static Mean createMean(Element mean) {
         Mean m = new Mean();
         Element grammer = mean.selectFirst("span.grammar");
         m.setGrammer(grammer != null ? grammer.text() : "");
@@ -117,15 +101,15 @@ public class LookupService {
         return m;
     }
 
-    private void setIdioms(LookupResult.LookupResultBuilder builder, Element idioms) {
-        if(idioms == null) return;
+    private static void setIdioms(Word.WordBuilder builder, Element idioms) {
+        if (idioms == null) return;
         Elements idiomElements = idioms.select(".idm-g");
         ArrayList<Idiom> idiomList = new ArrayList<>();
         idiomElements.forEach(i -> idiomList.add(createIdiom(i)));
         builder.idioms(idiomList);
     }
 
-    private Idiom createIdiom(Element idiom) {
+    private static Idiom createIdiom(Element idiom) {
         Idiom i = new Idiom();
         i.setDef(idiom.select(".def").text());
         Elements examples = idiom.select(".examples li");
@@ -135,12 +119,12 @@ public class LookupService {
         return i;
     }
 
-    private  String createLink(String word) {
+    private static String createLink(String word) {
         return new StringBuilder()
                 .append("https://www.oxfordlearnersdictionaries.com/definition/english/")
                 .append(word)
-                .append("_1?q=")
-                .append(word)
+//                .append("_1?q=")
+//                .append(word)
                 .toString();
     }
 }

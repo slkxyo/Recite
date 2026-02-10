@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.slkxy.recite.fxcontroller.MainController">
+   <bottom>
+      <Button fx:id="bt" mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
+   </bottom>
+   <top>
+      <TextArea fx:id="ta" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <TextField fx:id="tf" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

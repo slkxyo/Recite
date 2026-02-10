@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.slkxy.recite.entity.converter.IdiomListConverter;
+import org.slkxy.recite.entity.converter.MeanListConverter;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,14 +22,17 @@ public class Word {
 
     private String word;
 
-    public int grade;
+    private int grade;
 
-    @Lob
+    private boolean lookedUp;
+
+    @Column(columnDefinition = "BLOB")
     private byte[] audio;
 
-    @Convert(converter = Jsr310JpaConverters.class)
+    @Convert(converter = MeanListConverter.class)
     private List<Mean> means;
 
+    @Convert(converter = IdiomListConverter.class)
     private List<Idiom> idioms;
 
     @PrePersist
