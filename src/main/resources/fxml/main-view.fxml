@@ -4,15 +4,21 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.slkxy.recite.fxcontroller.MainController">
-   <bottom>
-      <Button fx:id="bt" mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
-   </bottom>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.slkxy.recite.fxcontroller.MainController">
    <top>
       <TextArea fx:id="ta" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </top>
    <center>
       <TextField fx:id="tf" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="bt_search" mnemonicParsing="false" text="search" />
+            <Button fx:id="bt_filldb" mnemonicParsing="false" text="FillDB" />
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

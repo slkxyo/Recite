@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javazoom.jl.player.Player;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slkxy.recite.entity.Idiom;
@@ -14,11 +13,9 @@ import org.slkxy.recite.entity.Word;
 import org.slkxy.recite.repositories.WordsRepository;
 import org.slkxy.recite.util.ClipboardUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -60,6 +57,7 @@ public class LookupService {
         setAudio(lb, audio);
 
         Element mean = body.selectFirst(".senses_multiple");
+        if(mean == null) mean = body.selectFirst(".sense_single");
         setMeans(lb, mean);
 
         Element idioms = body.selectFirst(".idioms");
@@ -82,7 +80,8 @@ public class LookupService {
         URL url = new URL(link);
         InputStream in = url.openStream();
         byte[] bytes = in.readAllBytes();
-        builder.audio(null);
+        builder.audio(bytes);
+        //playAudio(bytes);
         in.close();
     }
 
@@ -95,7 +94,7 @@ public class LookupService {
 
     private void setMeans(LookupResult.LookupResultBuilder builder, Element mean) {
         if(mean == null) return;
-        Elements eles = mean.select(".shcut-g");
+        Elements eles = mean.select(".sense");
         ArrayList<Mean> means = new ArrayList<>();
         eles.forEach(e -> means.add(createMean(e)) );
         builder.means(means);

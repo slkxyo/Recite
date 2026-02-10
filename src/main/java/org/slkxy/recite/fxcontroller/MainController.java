@@ -10,6 +10,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import lombok.extern.slf4j.Slf4j;
 import org.slkxy.recite.entity.LookupResult;
+import org.slkxy.recite.entity.Word;
 import org.slkxy.recite.service.LookupService;
 import org.slkxy.recite.service.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
@@ -29,7 +31,10 @@ public class MainController implements Initializable {
     private LookupService lookupService;
 
     @FXML
-    private Button bt;
+    private Button bt_search;
+
+    @FXML
+    private Button bt_filldb;
 
     @FXML
     private TextField tf;
@@ -38,14 +43,11 @@ public class MainController implements Initializable {
     private TextArea ta;
 
 
-    @FXML
-    protected void onHelloButtonClick() throws Exception {
-    }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-       bt.setOnAction(event -> {
+       bt_search.setOnAction(event -> {
            log.warn("looked up word");
            String word = tf.getText().trim();
            try {
@@ -56,5 +58,9 @@ public class MainController implements Initializable {
                throw new RuntimeException(e);
            }
        });
+
+       bt_filldb.setOnAction(event -> {
+           List<Word> words 
+       })
     }
 }
