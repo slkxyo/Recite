@@ -37,4 +37,5 @@ build/
 ### Mac OS ###
 .DS_Store
 
-auto_push_logs
+
+auto_push_logs/
