@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.slkxy.recite.entity.Word;
 import org.slkxy.recite.repositories.WordsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
