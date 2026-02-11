@@ -37,6 +37,9 @@ public class MainController implements Initializable {
     private Button bt_filldb;
 
     @FXML
+    private Button bt_import;
+
+    @FXML
     private TextField tf;
 
     @FXML
@@ -48,7 +51,6 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
        bt_search.setOnAction(event -> {
-           log.warn("looked up word");
            String word = tf.getText().trim();
            try {
                LookupResult res = lookupService.lookup(word,false);
@@ -59,8 +61,12 @@ public class MainController implements Initializable {
            }
        });
 
+       bt_import.setOnAction(event -> {
+           wordService.importWords();
+       });
+
        bt_filldb.setOnAction(event -> {
-           List<Word> words 
-       })
+           wordService.fillDB();
+       });
     }
 }

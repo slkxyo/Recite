@@ -19,6 +19,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @Slf4j
@@ -26,9 +27,15 @@ public class LookupService {
     @Autowired
     private  WordsRepository wordsRepository;
 
+    private AtomicInteger atomicInteger = new AtomicInteger(0);
+
+
     public LookupResult lookup(String word, boolean updateToDB) throws Exception{
         LookupResult result = lookup(word);
-        if(updateToDB) updateToDB(result);
+        if(updateToDB && result.isSuccess()){
+            updateToDB(result);
+            log.info("Saved LookupResult to DB: " + result.getWord() + "  Total: " + atomicInteger.incrementAndGet());
+        }
 
         return result;
     }
@@ -47,12 +54,18 @@ public class LookupService {
     private  LookupResult lookup(String word) throws Exception {
         LookupResult.LookupResultBuilder lb = LookupResult.builder();
         lb.word(word);
-        Element body = Jsoup
-                .connect(createLink(word))
-                .get()
-                .selectFirst("#entryContent")
-                .selectFirst(".entry");
-        assert body != null;
+        Element body;
+        try {
+            body = Jsoup
+                    .connect(createLink(word))
+                    .get()
+                    .selectFirst("#entryContent")
+                    .selectFirst(".entry");
+
+        }
+        catch (Exception e) {
+            return  lb.success(false).build();
+        }
         Element audio = body.selectFirst(".top-container");
         setAudio(lb, audio);
 
@@ -64,19 +77,26 @@ public class LookupService {
         setIdioms(lb, idioms);
 
         LookupResult result = lb.build();
+        if(result.getAudio() != null && result.getMeans() != null )  result.setSuccess(true);
+        else result.setSuccess(false);
 
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(result);
-        ClipboardUtil.copyToClipboard(json);
-        log.warn("Looked up word: " + word);
-        log.warn(json);
 
-        return lb.build();
+        //JSON化后复制到剪切板（调试用）
+//        ObjectMapper mapper = new ObjectMapper();
+//        String json = mapper.writeValueAsString(result);
+//        ClipboardUtil.copyToClipboard(json);
+//        log.warn("Looked up word: " + word);
+//        log.warn(json);
+
+        return result;
     }
 
     private void setAudio(LookupResult.LookupResultBuilder builder, Element audio) throws Exception {
         if(audio == null) return;
-        String link = audio.select("div.sound.audio_play_button.pron-us").attr("data-src-mp3");
+//        String link = audio.select("div.sound.audio_play_button.pron-us").attr("data-src-mp3");
+        String link = audio.select("pron-us").attr("data-src-mp3");
+        if(link.isBlank()) link = audio.select("pron-us").attr("data-src-ogg");
+        if(link.isBlank()) return;
         URL url = new URL(link);
         InputStream in = url.openStream();
         byte[] bytes = in.readAllBytes();

@@ -11,6 +11,8 @@ import java.util.List;
 @Data
 @Builder
 public class LookupResult {
+    private boolean success;
+
     private String word;
 
     private byte[] audio;
